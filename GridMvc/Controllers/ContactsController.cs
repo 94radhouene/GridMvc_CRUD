@@ -169,6 +169,38 @@ namespace GridMvc.Controllers
             ViewBag.Status = status;
             return View(c);
         }
+        //Delete 
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var c = GetContact(id);
+            if (c == null)
+            {
+                return HttpNotFound();
+            }
+            return View(c);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public ActionResult DeleteContact(int id)
+        {
+            using (TestBaseEntities dc = new TestBaseEntities())
+            {
+                var v = dc.Contacts.Where(a => a.ContactID.Equals(id)).FirstOrDefault();
+                if (v != null)
+                {
+                    dc.Contacts.Remove(v);
+                    dc.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+        }
+
     }
 }
 

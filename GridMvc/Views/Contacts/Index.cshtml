@@ -16,6 +16,6 @@ columns: grid.Columns
         grid.Column(columnName: "CountryName", header: "Country"),
         grid.Column(columnName: "StateName", header: "State"),
         grid.Column(header: "Edit", format:@<text>@Html.ActionLink("Edit", "Save", "Contacts", new { id = item.ContactID }, null)</text>),
-        grid.Column(header: "Delete", format:@<text>@Html.ActionLink("Delete", "Delete", "Home", new { id = item.ContactID }, null)</text>)
+        grid.Column(header: "Delete", format:@<text>@Html.ActionLink("Delete", "Delete", "Contacts", new { id = item.ContactID }, null)</text>)
     )
 )
