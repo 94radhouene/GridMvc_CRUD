@@ -1,0 +1,21 @@
+﻿@model IEnumerable<GridMvc.Contact>
+
+@{
+    ViewBag.Title = "Index";
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+}
+
+<h2>Contact List</h2>
+@Html.ActionLink("Add New Contact", "Save", "Contacts", null, new { @style = "font-size:20px" })
+@grid.GetHtml(
+tableStyle: "table table-responsive",
+columns: grid.Columns
+    (
+        grid.Column(columnName: "ContactPerson", header: "Contact Person"),
+        grid.Column(columnName: "ContactNo", header: "Contact No"),
+        grid.Column(columnName: "CountryName", header: "Country"),
+        grid.Column(columnName: "StateName", header: "State"),
+        grid.Column(header: "Edit", format:@<text>@Html.ActionLink("Edit", "Save", "Contacts", new { id = item.ContactID }, null)</text>),
+        grid.Column(header: "Delete", format:@<text>@Html.ActionLink("Delete", "Delete", "Home", new { id = item.ContactID }, null)</text>)
+    )
+)
